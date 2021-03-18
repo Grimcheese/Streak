@@ -8,7 +8,17 @@ public class Main
 	public static void main(String[] args)
 	{
 		// Display main window
-		Window mainWin = new Window("Streak");
+		Window firstWin = display();
+		Window seconWin = display();
+		
+	}
+	
+	public static Window display()
+	{
+		Window win = new Window("Streak");
+		
+		return(win);
 	}
 	
 }
+
