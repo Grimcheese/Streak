@@ -9,7 +9,12 @@ public class Main
 	{
 		// Display main window
 		Window firstWin = display();
-		Window seconWin = display();
+		
+		
+		Streak WriteCode = new Streak("Write Code");
+		WriteCode.addToday();
+		
+		WriteCode.displayClass();
 		
 	}
 	

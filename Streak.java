@@ -56,6 +56,17 @@ public class Streak
 		}
 	}
 	
+	public void displayClass()
+	{
+		System.out.println(name);
+		System.out.println(streakLength);
+		System.out.println(date.length);
+		for(int i = 0; i < date.length; i++)
+		{
+			System.out.println(date[i]);
+		}
+	}
+	
 	
 	/* Mutator methods */
 	// Appends today's date to the end of date
