@@ -4,6 +4,9 @@ import javax.swing.JFrame;
 import java.io.File;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
+
+import java.io.IOException;
 
 // Main class 
 public class Main
@@ -19,7 +22,7 @@ public class Main
 		
 		WriteCode.DisplayClass();
 		
-		File profiles = new File("Profiles");
+		File profiles = new File("Profiles.dat");
 		FileCheck(profiles);
 		
 	}
@@ -37,6 +40,8 @@ public class Main
 			System.out.println("File not found. Initialising profiles");
 			Profile defaultProfile = new Profile("Default");
 			System.out.println(defaultProfile.GetName());
+			
+			MakeFile(profiles, defaultProfile);
 		}
 	}
 	
@@ -47,5 +52,19 @@ public class Main
 		return(win);
 	}
 	
+	public static void MakeFile(File newFile, Profile newProfile)
+	{
+		ObjectOutputStream outputStream = null;
+		try
+		{
+			outputStream = new ObjectOutputStream(new FileOutputStream(newFile));
+		}
+		catch(IOException e)
+		{
+			System.exit(0);
+		}
+		
+		System.out.println(newFile + " created");
+	}
 }
 
