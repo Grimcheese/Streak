@@ -33,22 +33,22 @@ public class Streak
 	
 	
 	/* Accessor methods */
-	public String getName()
+	public String GetName()
 	{
 		return(name);
 	}
 	
-	public String getDescription()
+	public String GetDescription()
 	{
 		return(description);
 	}
 	
-	public int getLength()
+	public int GetLength()
 	{
 		return(streakLength);
 	}
 	
-	public void printDates()
+	public void PrintDates()
 	{
 		for(int i = 0; i < date.length; i++)
 		{
@@ -56,7 +56,7 @@ public class Streak
 		}
 	}
 	
-	public void displayClass()
+	public void DisplayClass()
 	{
 		System.out.println(name);
 		System.out.println(streakLength);
@@ -70,7 +70,7 @@ public class Streak
 	
 	/* Mutator methods */
 	// Appends today's date to the end of date
-	public void addToday()
+	public void AddToday()
 	{
 		date[date.length - 1] = LocalDate.now();
 		streakLength++;
