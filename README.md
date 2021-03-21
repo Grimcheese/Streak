@@ -5,3 +5,10 @@ A streak is simply how many days in a row you have completed a task. You enter a
 will then keep track of your streaks and display information relevant to each task. 
 
 It is being developed using Java to ensure cross platform capability and potentially to be used on Android mobile platforms.
+
+
+***********************
+Development To-Do List
+***********************
+In Main.java the LoadProfiles() method needs to read userdata.dat file and store Profiles for use
+by program.
