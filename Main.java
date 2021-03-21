@@ -8,28 +8,60 @@ import java.io.FileOutputStream;
 
 import java.io.IOException;
 
-// Main class 
 public class Main
 {
 	public static void main(String[] args)
 	{
+		final String USER_DATA_FILE_NAME = "userdata.dat";
+		
 		// Display main window
-		Window firstWin = display();
+		Window firstWin = new Window("Streak");
 		
+		// Create userdata file object and load profile from file it describes
+		File userdata = new File(USER_DATA_FILE_NAME);
+		Profile[] userProfile = LoadProfiles(userdata);
 		
-		Streak WriteCode = new Streak("Write Code");
-		WriteCode.AddToday();
-		
-		WriteCode.DisplayClass();
-		
-		File profiles = new File("Profiles.dat");
-		FileCheck(profiles);
-		
+		userProfile[0].PrintProfile();
 	}
 	
-	public static void FileCheck(File profiles)
+	public static Profile[] LoadProfiles(File userdata)
 	{
-		if(profiles.exists())
+		Profile[] tempProfiles;
+		/*
+		// Check if file exists
+		if(userdata.exists())
+		{
+			// Load userdata into program
+			 
+			
+		}
+		else
+		{
+			// Create new file and prompt user to create a profile
+			MakeFile(userdata);
+			
+			tempProfiles = new Profile[1];
+			tempProfiles[0] = MakeProfile();
+			
+		}
+		*/
+		MakeFile(userdata);
+		tempProfiles = new Profile[1];
+		tempProfiles[0] = MakeProfile();
+		
+		return(tempProfiles);
+	}
+	
+	// Create a new Profile using user input
+	public static Profile MakeProfile()
+	{
+		Profile newProfile = new Profile("Name");
+		return(newProfile);
+	}
+	
+	public static void FileCheck(File file)
+	{
+		if(file.exists())
 		{
 			// Put code for loading file here
 			System.out.println("Profile file found. Loading...");
@@ -38,21 +70,17 @@ public class Main
 		{
 			// Initialise Profiles File
 			System.out.println("File not found. Initialising profiles");
+			
+			/* Follow Code only for test purposes */
 			Profile defaultProfile = new Profile("Default");
 			System.out.println(defaultProfile.GetName());
 			
-			MakeFile(profiles, defaultProfile);
+			MakeFile(file);
 		}
 	}
 	
-	public static Window display()
-	{
-		Window win = new Window("Streak");
-		
-		return(win);
-	}
 	
-	public static void MakeFile(File newFile, Profile newProfile)
+	public static void MakeFile(File newFile)
 	{
 		ObjectOutputStream outputStream = null;
 		try
