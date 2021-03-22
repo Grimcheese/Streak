@@ -24,41 +24,71 @@ public class Main
 		userProfile[0].PrintProfile();
 	}
 	
+	
+	/* 
+		Begins loading Profiles from data file referred to with File object - if it exists
+		All profiles stored in file are stored in an array and returned to calling method 
+	*/
 	public static Profile[] LoadProfiles(File userdata)
 	{
 		Profile[] tempProfiles;
+		
 		/*
 		// Check if file exists
 		if(userdata.exists())
 		{
 			// Load userdata into program
-			 
+			
 			
 		}
 		else
 		{
 			// Create new file and prompt user to create a profile
-			MakeFile(userdata);
+			MakeFile(userdata); // Unnecessary
+			
+			outputStream = new ObjectOutputStream
 			
 			tempProfiles = new Profile[1];
 			tempProfiles[0] = MakeProfile();
+			WriteProfileToFile(userdata, tempProfiles);
 			
 		}
 		*/
-		MakeFile(userdata);
+
 		tempProfiles = new Profile[1];
 		tempProfiles[0] = MakeProfile();
 		
+		WriteProfileToFile(userdata, tempProfiles[0]);
+		
 		return(tempProfiles);
+	}
+	
+	public static void WriteProfileToFile(File file, Profile tempProfile)
+	{
+		try
+		{
+			ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file));
+			outputStream.writeInt(1);
+			
+			outputStream.writeObject(tempProfile);
+			System.out.println("Profile " + tempProfile.ToString() + " written to file.");
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println("Error writing to file");
+		}
+		
 	}
 	
 	// Create a new Profile using user input
 	public static Profile MakeProfile()
 	{
-		Profile newProfile = new Profile("Name");
+		Profile newProfile = new Profile("Test Profile");
 		return(newProfile);
 	}
 	
+	// Do not use
 	public static void FileCheck(File file)
 	{
 		if(file.exists())
@@ -71,7 +101,7 @@ public class Main
 			// Initialise Profiles File
 			System.out.println("File not found. Initialising profiles");
 			
-			/* Follow Code only for test purposes */
+			/* Following code only for test purposes */
 			Profile defaultProfile = new Profile("Default");
 			System.out.println(defaultProfile.GetName());
 			
@@ -79,7 +109,7 @@ public class Main
 		}
 	}
 	
-	
+	// Creates a new file in program directory using name from File object newFile
 	public static void MakeFile(File newFile)
 	{
 		ObjectOutputStream outputStream = null;
@@ -89,6 +119,7 @@ public class Main
 		}
 		catch(IOException e)
 		{
+			System.out.println("Unable to create file. Closing.");
 			System.exit(0);
 		}
 		

@@ -33,6 +33,7 @@ public class Profile implements Serializable
 		}
 	}
 	
+	
 	/* Accessor methods */
 	
 	public String GetName()
@@ -66,6 +67,11 @@ public class Profile implements Serializable
 		{
 			System.out.println("No Streaks");
 		}
+	}
+	
+	public String ToString()
+	{
+		return(name);
 	}
 	/* Mutator methods */
 	
