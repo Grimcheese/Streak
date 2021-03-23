@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
+import java.io.FileInputStream;
 
 import java.io.IOException;
 
@@ -33,32 +34,49 @@ public class Main
 	{
 		Profile[] tempProfiles;
 		
-		/*
+		
 		// Check if file exists
 		if(userdata.exists())
 		{
 			// Load userdata into program
+			tempProfiles = ReadProfileFromFile(userdata);
 			
 			
 		}
 		else
 		{
 			// Create new file and prompt user to create a profile
-			MakeFile(userdata); // Unnecessary
-			
-			outputStream = new ObjectOutputStream
-			
+			//MakeFile(userdata); // Unnecessary
 			tempProfiles = new Profile[1];
 			tempProfiles[0] = MakeProfile();
-			WriteProfileToFile(userdata, tempProfiles);
+			WriteProfileToFile(userdata, tempProfiles[0]);
 			
 		}
-		*/
-
-		tempProfiles = new Profile[1];
-		tempProfiles[0] = MakeProfile();
 		
-		WriteProfileToFile(userdata, tempProfiles[0]);
+
+		return(tempProfiles);
+	}
+	
+	public static Profile[] ReadProfileFromFile(File file)
+	{
+		ObjectInputStream inputStream = null;
+		Profile[] tempProfiles = null;
+		try
+		{
+			inputStream = new ObjectInputStream(new FileInputStream(file));
+			int numberOfProfiles = inputStream.readInt();
+			
+			tempProfiles = new Profile[numberOfProfiles];
+			for(int i = 0; i < numberOfProfiles; i++)
+			{
+				tempProfiles[i] = (Profile)inputStream.readObject();
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println("File reading error. Closing");
+			System.exit(0);
+		}
 		
 		return(tempProfiles);
 	}
