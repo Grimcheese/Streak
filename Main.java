@@ -18,10 +18,14 @@ public class Main
 		// Display main window
 		Window firstWin = new Window("Streak");
 		
-		// Create userdata file object and load profile from file it describes
+		
+		
+		// Load profiles from userdata file if it exists - else create a new one
 		File userdata = new File(USER_DATA_FILE_NAME);
 		Profile[] userProfile = LoadProfiles(userdata);
 		
+		
+		// 
 		userProfile[0].PrintProfile();
 	}
 	
@@ -40,8 +44,6 @@ public class Main
 		{
 			// Load userdata into program
 			tempProfiles = ReadProfileFromFile(userdata);
-			
-			
 		}
 		else
 		{
@@ -49,7 +51,7 @@ public class Main
 			//MakeFile(userdata); // Unnecessary
 			tempProfiles = new Profile[1];
 			tempProfiles[0] = MakeProfile();
-			WriteProfileToFile(userdata, tempProfiles[0]);
+			WriteProfileToFile(userdata, tempProfiles);
 			
 		}
 		
@@ -81,15 +83,20 @@ public class Main
 		return(tempProfiles);
 	}
 	
-	public static void WriteProfileToFile(File file, Profile tempProfile)
+	// Writes an array of Profiles to a file, file begins with number of stored profiles
+	public static void WriteProfileToFile(File file, Profile[] tempProfile)
 	{
 		try
 		{
 			ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file));
-			outputStream.writeInt(1);
+			outputStream.writeInt(tempProfile.length);
 			
-			outputStream.writeObject(tempProfile);
-			System.out.println("Profile " + tempProfile.ToString() + " written to file.");
+			for(int i = 0; i < tempProfile.length; i++)
+			{
+				outputStream.writeObject(tempProfile);
+				System.out.println("Profile " + tempProfile[i].ToString() + " written to file.");
+			}
+			
 			
 		}
 		catch(Exception e)
