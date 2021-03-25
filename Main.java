@@ -13,17 +13,20 @@ public class Main
 {
 	public static void main(String[] args)
 	{
+		// Stores file name to be used to store use profiles
 		final String USER_DATA_FILE_NAME = "userdata.dat";
 		
 		// Display main window
-		Window firstWin = new Window("Streak");
+		Window win = new Window("Streak");
 		
 		
 		
 		// Load profiles from userdata file if it exists - else create a new one
 		File userdata = new File(USER_DATA_FILE_NAME);
-		Profile[] userProfile = LoadProfiles(userdata);
+		Profile[] userProfile = SelectProfile(userdata);
+		Profile activeProfile = userProfile[0];
 		
+
 		
 		// 
 		userProfile[0].PrintProfile();
@@ -34,7 +37,7 @@ public class Main
 		Begins loading Profiles from data file referred to with File object - if it exists
 		All profiles stored in file are stored in an array and returned to calling method 
 	*/
-	public static Profile[] LoadProfiles(File userdata)
+	public static Profile[] SelectProfile(File userdata)
 	{
 		Profile[] tempProfiles;
 		
@@ -83,6 +86,11 @@ public class Main
 		return(tempProfiles);
 	}
 	
+	/* 
+		WriteProfileToFile stores all the Profiles being used by streak. On every write the 
+		current number of profiles is stored first and then each Profile object is written 
+		starting with the active or "default" profile. 
+	*/
 	// Writes an array of Profiles to a file, file begins with number of stored profiles
 	public static void WriteProfileToFile(File file, Profile[] tempProfile)
 	{
