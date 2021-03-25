@@ -10,5 +10,12 @@ It is being developed using Java to ensure cross platform capability and potenti
 ***********************
 Development To-Do List
 ***********************
-In Main.java the LoadProfiles() method needs to read userdata.dat file and store Profiles for use
+DONE In Main.java the LoadProfiles() method needs to read userdata.dat file and store Profiles for use
 by program.
+
+Upon start window should display name of current profile - if no profiles saved, prompt to make a
+profile.
+
+
+Window must display grid which represents the timeline of the last few days for each streak in profile.
+
